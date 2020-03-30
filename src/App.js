@@ -5,7 +5,8 @@ import './App.css';
 
 //Components
 import Header from './components/Header';
-import Home from "./containers/Home";
+import News from './containers/News';
+import Recipe from './containers/Recipe'; 
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <Router>
         <Switch>
           <Route path="/">
-           <Home/> 
+           <News/> 
+           <Recipe/> 
           </Route>
         </Switch>
       </Router>
