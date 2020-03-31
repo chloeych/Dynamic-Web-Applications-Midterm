@@ -1,0 +1,35 @@
+.SiteWrapper{
+    margin: 0 auto;
+    max-width: 1080px;
+    padding: 0 25px;
+    width: 100%;
+  }
+
+.Home{
+  margin: 0 auto;
+  max-width: 1080px;
+  text-align: center;
+  padding: 10px 20px;
+}
+.Header{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.newsArticleNav{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.newsArticleNav a{
+  padding: 5px; 
+  display: block;
+  color: black;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 400;
+
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 400ms ease;
+}

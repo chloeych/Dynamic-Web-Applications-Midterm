@@ -14,12 +14,6 @@ function Header(){
        <a href = "/?topic=health">Health</a>
      </div>
 
-     <div className="recipeNav">
-       <a href = "/?ingredient=blackbean">Black Beans</a>
-       <a href = "/?ingredient=chickpeas">Chickpeas</a>
-       <a href = "/?ingredient=canellinibean">Canellini Beans</a>
-       <a href = "/?ingredient=splitpeas">Split Peas</a>
-     </div>
 
      </header>
    </div>  

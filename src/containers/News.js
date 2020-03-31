@@ -11,11 +11,10 @@ function News(){
   const[newsData, setnewsData]=useState({});
   const[topic, setTopic]=useState(null);
   const[title, setTitle]=useState("");
-  const[subtitle, setSubtitle]=useState("");
   const[author, setAuthor]=useState("");
   const[abstractText, setAbstractText]=useState("");
   const[articleLink, setArticleLink]=useState("");
-  
+  let number = Math.floor((Math.random() * 10) + 1);
  
 
 let history = useHistory(); 
@@ -38,7 +37,7 @@ useEffect(()=> {
   if (topic !== null){
   axios
   .get(
-    `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${topic}&api-key=${apiKeyNews}`
+    `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${topic}&timestags?query=coronavirus&api-key=${apiKeyNews}`
     )
   .then(function (response) {
     console.log(response);
@@ -57,20 +56,22 @@ useEffect(()=> {
 useEffect(()=> {
 
   if (newsData.response){
-    setTitle(newsData.response.docs[0].headline.print_headline);
-    setSubtitle(newsData.response.docs[0].headline.main);
-    setAuthor(newsData.response.docs[0].byline.original);
-    setAbstractText(newsData.response.docs[0].abstract);
-    setArticleLink(newsData.response.docs[0].web_url);
+
+    setTitle(newsData.response.docs[number].headline.main);
+    setAuthor(newsData.response.docs[number].byline.original);
+    setAbstractText(newsData.response.docs[number].abstract);
+    setArticleLink(newsData.response.docs[number].web_url);
     
 
   }
+
 }, [newsData]);
+
+
 
   return(
     <div className="NewsInfo_Data">
       <h1> NEWS: {title} </h1>
-      <h2>{subtitle}</h2>
       <p>{author}</p>
       <p>{abstractText}</p>
       <p>Read more <a href= {articleLink}>here</a></p>

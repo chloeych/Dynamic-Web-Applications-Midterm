@@ -6,7 +6,7 @@ import './App.css';
 //Components
 import Header from './components/Header';
 import News from './containers/News';
-import Recipe from './containers/Recipe'; 
+import Food from './containers/Food'; 
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Switch>
           <Route path="/">
            <News/> 
-           <Recipe/> 
+           <Food/> 
           </Route>
         </Switch>
       </Router>
