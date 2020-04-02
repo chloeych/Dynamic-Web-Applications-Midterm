@@ -14,7 +14,10 @@ function News(){
   const[author, setAuthor]=useState("");
   const[abstractText, setAbstractText]=useState("");
   const[articleLink, setArticleLink]=useState("");
-  let number = Math.floor((Math.random() * 10) + 1);
+  const[leadParagraph, setLeadParagraph]=useState("");
+  const[articleImg, setArticleImg]=useState("");
+  let img = `https://www.nytimes.com/${articleImg}`
+  let timesLogo = `http://img1.nymag.com/imgs/daily/intelligencer/2014/08/20/20-ny-times-logo.w529.h529.2x.jpg`;
  
 
 let history = useHistory(); 
@@ -56,13 +59,14 @@ useEffect(()=> {
 useEffect(()=> {
 
   if (newsData.response){
-
+    let number = Math.floor((Math.random() * 10));
     setTitle(newsData.response.docs[number].headline.main);
     setAuthor(newsData.response.docs[number].byline.original);
     setAbstractText(newsData.response.docs[number].abstract);
     setArticleLink(newsData.response.docs[number].web_url);
+    setLeadParagraph(newsData.response.docs[number].lead_paragraph);
+    setArticleImg(newsData.response.docs[number].multimedia[0].url);
     
-
   }
 
 }, [newsData]);
@@ -71,10 +75,18 @@ useEffect(()=> {
 
   return(
     <div className="NewsInfo_Data">
-      <h1> NEWS: {title} </h1>
-      <p>{author}</p>
-      <p>{abstractText}</p>
-      <p>Read more <a href= {articleLink}>here</a></p>
+
+        <h2 className="newsTitle"> <img className="logo" src={timesLogo} alt="logo"></img>{title} </h2>
+
+      <div className="NewsInfo_Body">
+       <img className="bodyImage" src={img} alt="nytimage"></img>
+       <div className="wrapBox">
+       <p>{author}</p>
+       <h3>{abstractText}</h3>
+       <p>{leadParagraph}</p>
+       <p>Read more <a href= {articleLink}>here</a></p>
+       </div>
+     </div>
 
     </div>
   )

@@ -11,12 +11,12 @@ import Food from './containers/Food';
 function App() {
   return (
     <div className="SiteWrapper">
-      <Header/>
+      <div className="headerWrapper"><Header/></div>
       <Router>
         <Switch>
           <Route path="/">
-           <News/> 
-           <Food/> 
+            <div className="newsWrapper"><News/> </div>
+            <div className="foodWrapper"><Food/> </div>
           </Route>
         </Switch>
       </Router>

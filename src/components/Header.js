@@ -4,15 +4,20 @@ function Header(){
  return(
    <div className="header">
     <header> 
-     <h1>CO-VID 19 STARTER PACK</h1>
-         <p> A starter pack to get you through the isolation </p>
+
+     <div className="headerBar">
+     <h1 className="mainHeader">Doomsday Survival Pack</h1>
 
      <div className="newsArticleNav">
-       <a href = "/?topic=opinion">Opinion</a>
-       <a href = "/?topic=politics">Politics</a>
-       <a href = "/?topic=U.S.">U.S.</a>
-       <a href = "/?topic=health">Health</a>
+       <a href = "/?topic=World" className="one">WORLD</a>
+       <a href = "/?topic=business" className="two">BUSINESS</a>
+       <a href = "/?topic=U.S." className="three">U.S.</a>
+       <a href = "/?topic=health" className="four">HEALTH</a>
      </div>
+
+     </div>
+      
+        
 
 
      </header>

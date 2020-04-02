@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react"; 
 import axios from 'axios'; 
+import Popup from "reactjs-popup";
+
 
 // API KEY 
 
@@ -11,9 +13,34 @@ function Food(){
     const[recipeData, setRecipeData]=useState({});
     const[recipeName, setRecipeName]=useState("");
     const[recipeLink, setRecipeLink]=useState("");
-    let ingredient = `beans`;
-     
+    const[recipeIngredients, setRecipeIngredients]=useState([]);
+    const[recipeImg, setRecipeImg]=useState("");
+    let ingredient = "blackbean";
+    let userImg = "../components/images/times.jpg"
+    let servingSize = [{userImg},{userImg},{userImg},{userImg}]
+
+
+    function NumberList(props) {
+      const recipeIngredients = props.recipeIngredients;
+      const listItems = recipeIngredients.map((number) =>
+        <li key={number.toString()}>{number}</li>
+      );
+      return (
+        <ul>{listItems}</ul>
+      );
+    }
+
+    function ServingSizeImg(kiwi){
+      let servingSize = kiwi.servingSize; 
+      const listItme = servingSize.map((number)=>
+      <p key={number.toString()}> </p>);
+      return(
+      <p>{listItme}</p>
+      )
+    }
+
     
+
 useEffect(()=> {
     axios
     .get(
@@ -31,21 +58,45 @@ useEffect(()=> {
       }); 
     },[ingredient]);
 
+    
+
     useEffect(()=> {
-        if(recipeData.response){
-            setRecipeName(recipeData.hits[0].recipe.label);
-            setRecipeLink(recipeData.hits[0].recipe.url);
-            
+      console.log('recipeData', recipeData);
+        if(recipeData.hits){
+           let foodNumber = Math.floor((Math.random() * 10));
+            setRecipeName(recipeData.hits[foodNumber].recipe.label);
+            setRecipeLink(recipeData.hits[foodNumber].recipe.url);
+            setRecipeIngredients(recipeData.hits[foodNumber].recipe.ingredientLines);
+            setRecipeImg(recipeData.hits[foodNumber].recipe.image);
         }
     }, [recipeData])
 
+    
+
+
+      
+   
 
  return(
-     <div className="recipeBody">
-         <p>Recipe Name: {recipeName}</p>
-         <p>Read more <a href= {recipeLink}>here</a></p>
-         <p></p>
-     </div>
+ 
+         
+         <Popup trigger={<button className="btn"> Find me a recipe!</button>} modal closeOnDocumentClick>
+          <div className="recipeBody">
+
+          <div><h2 className="foodTitle">Recipe Name: {recipeName}</h2>
+          <p><ServingSizeImg servingSize={servingSize}/></p>
+          <div className="foodBodyText">
+         <img className="foodImg" src={recipeImg} alt="go hungry"></img>
+         <p>You will need: <NumberList recipeIngredients={recipeIngredients}/></p>
+         </div>
+         <p>Find the full recipe <a href= {recipeLink}>here</a></p></div>
+         
+
+         </div>
+          </Popup>
+         
+         
+
  )
 }
 
