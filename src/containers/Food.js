@@ -15,11 +15,9 @@ function Food(){
     const[recipeLink, setRecipeLink]=useState("");
     const[recipeIngredients, setRecipeIngredients]=useState([]);
     const[recipeImg, setRecipeImg]=useState("");
+    const[servingSize, setServingSize]=useState("");
     let ingredient = "blackbean";
-    let userImg = "../components/images/times.jpg"
-    let servingSize = [{userImg},{userImg},{userImg},{userImg}]
-
-
+   
     function NumberList(props) {
       const recipeIngredients = props.recipeIngredients;
       const listItems = recipeIngredients.map((number) =>
@@ -30,16 +28,7 @@ function Food(){
       );
     }
 
-    function ServingSizeImg(kiwi){
-      let servingSize = kiwi.servingSize; 
-      const listItme = servingSize.map((number)=>
-      <p key={number.toString()}> </p>);
-      return(
-      <p>{listItme}</p>
-      )
-    }
 
-    
 
 useEffect(()=> {
     axios
@@ -68,23 +57,19 @@ useEffect(()=> {
             setRecipeLink(recipeData.hits[foodNumber].recipe.url);
             setRecipeIngredients(recipeData.hits[foodNumber].recipe.ingredientLines);
             setRecipeImg(recipeData.hits[foodNumber].recipe.image);
+            setServingSize(recipeData.hits[foodNumber].recipe.yield);
         }
     }, [recipeData])
 
-    
 
 
-      
    
 
- return(
- 
-         
+ return( 
          <Popup trigger={<button className="btn"> Find me a recipe!</button>} modal closeOnDocumentClick>
           <div className="recipeBody">
-
           <div><h2 className="foodTitle">Recipe Name: {recipeName}</h2>
-          <p><ServingSizeImg servingSize={servingSize}/></p>
+          <div className="Home" style = {{opacity:`${servingSize/10}`}}>Serving Size: {servingSize}</div>
           <div className="foodBodyText">
          <img className="foodImg" src={recipeImg} alt="go hungry"></img>
          <p>You will need: <NumberList recipeIngredients={recipeIngredients}/></p>
